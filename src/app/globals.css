@@ -1,6 +1,8 @@
-@import "tailwindcss";
-
-:root {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import "tailwindcss"; */
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +25,81 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+
+/* import the Dropdown Tree dependency styles */
+:root {
+  --primary: #225F6A;
+  --primary-foreground: #ffffff;
+}
+
+.dark {
+  --primary: #1b4a52;
+  --primary-foreground: #ffffff;
+}
+
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.wave-1-bg {
+  background-image: url("../../public/assets/images/wave-1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.box-bg-image {
+  background-image: url("../../public/assets/images/box-bg-image.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.seeker-bg-image {
+  background-image: url("../../public/assets/images/seeker-bg-image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+  position: relative;
+}
+
+.seeker-bg-image::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #000000a0;
+}
+
+.image-shadow {
+  filter: drop-shadow(10px 10px 5px #9A65CF);
+}
+
+@media screen and (max-width: 1024px) {
+  .box-bg-image {
+    background-size: 100% 100%;
+  }
+}
+
+
+@keyframes caret-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-caret-blink {
+  animation: caret-blink 1s step-start infinite;
 }
