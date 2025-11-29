@@ -335,7 +335,7 @@ const PasswordChange = () => {
                                         />
                                         <div className="absolute right-7 top-1/4">
                                             {currentPasswordStatus === "typing" && <Ellipsis className="animate-pulse" color="gray" />}
-                                            {currentPasswordStatus === "loading" && <Spinner2 size={6} />}
+                                            {currentPasswordStatus === "loading" && <Spinner2 size={"6"} />}
                                             {currentPasswordStatus === "success" && <Check color="green" />}
                                             {currentPasswordStatus === "failed" && <CircleAlert color="red" />}
                                         </div>
@@ -366,7 +366,7 @@ const PasswordChange = () => {
                                         />
                                         <div className="absolute right-7 top-1/4">
                                             {otpStatus === "typing" && <Ellipsis className="animate-pulse" color="gray" />}
-                                            {otpStatus === "loading" && <Spinner2 size={6} />}
+                                            {otpStatus === "loading" && <Spinner2 size={"6"} />}
                                             {otpStatus === "success" && <Check color="green" />}
                                             {otpStatus === "failed" && <CircleAlert color="red" />}
                                         </div>

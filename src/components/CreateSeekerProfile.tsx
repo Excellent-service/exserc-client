@@ -37,7 +37,7 @@ import { CreateSeekerProfileSchema } from '@/lib/definitions';
 
 const CreateSeekerProfile_ = () => {
   const [profileSrc, setProfileSrc] = useState<string>('');
-  const [selectedDate, setSelectedDate] = useState<any>();
+  const [selectedDate, setSelectedDate] = useState<Date | null>();
   const [phone, setPhone] = useState("");
   const genderOptions = ["male", "female"] as const
 

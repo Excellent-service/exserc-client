@@ -29,6 +29,7 @@ const VerifyForgotPassword = () => {
   // Custom hook to handle OTP request
   // It uses the requestRegistrationOtp action to resend the OTP
   const { onSubmit: resendOtp, loading: resendLoading } = useAuth({
+    schema: Otp,
     action: resendForgotPasswordOtp,
   })
 

@@ -53,7 +53,7 @@ type AuthContextType = {
     formData: any;
     setFormData: React.Dispatch<React.SetStateAction<any>>;
     errors: Record<string, string>;
-    setErrors: any,
+    setErrors: React.Dispatch<React.SetStateAction<Record<string, string>>>,
     loading: boolean;
     subLoading: boolean,
 
@@ -68,7 +68,7 @@ type AuthContextType = {
     updateProfile: (data: GenericFormData<typeof CreateSeekerProfileSchema> | GenericFormData<typeof CreateProviderProfileSchema>, type: "seeker" | "provider") => Promise<void>;
     verifyOldPassword: (password: string) => Promise<{ status: string }>;
     verifyPasswordChangeOTP: (password: string) => Promise<{ status: string }>;
-    resend_verifyPasswordChangeOTP: () => Promise<{status: string}>;
+    resend_verifyPasswordChangeOTP: () => Promise<{ status: string }>;
     changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
 };
 
@@ -128,7 +128,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
 
-    const userSpecificFetches = async (storedToken: any) => {
+    const userSpecificFetches = async (storedToken: string) => {
         retrievProfileData(storedToken);
     }
 
@@ -263,8 +263,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             Toast.success("Success");
             window.location.href = `/signup/verify?role=${responseBody?.data?.role}`;
 
-        } catch (error: any) {
-            Toast.error("Failed to Login" + error?.message || error);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                Toast.error("Failed to Login" + error?.message || error);
+            } else {
+                Toast.error("An unexpected error occurred.");
+            }
         } finally {
             setLoading(false);
         }
@@ -384,8 +388,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
             Toast.success(responseBody.message || 'OTP sent successfully!')
 
-        } catch (error: any) {
-            Toast.error("Failed to resend email: " + error?.message || error);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                Toast.error("Failed to resend email: " + error?.message || error);
+            } else {
+                Toast.error("An unexpected error occurred.");
+            }
         } finally {
             setSubLoading(false);
         }
@@ -419,8 +427,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             Toast.success(JSON.stringify(responseBody?.data));
             // Toast.success("Success");
             window.location.href = `/signup/create-profile?role=${tempUser.role}`;
-        } catch (error: any) {
-            Toast.error("Something went wrong: " + error?.message || error);
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                Toast.error("Something went wrong: " + error?.message || error);
+            } else {
+                Toast.error("An unexpected error occurred.");
+            }
         } finally {
             setLoading(false);
         }
@@ -430,7 +442,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
 
 
-    const retrievProfileData = async (token: any) => {
+    const retrievProfileData = async (token: string) => {
         // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwODYxOTA1LCJpYXQiOjE3NjA4NTgzMDUsImp0aSI6ImUwNzEwOTQwNTIzZjRjYmY4NTE5ZWQ5NzRlOTEyZmQ3IiwidXNlcl9pZCI6MTE4fQ.VXQCxBYLhwgEAefxADP4LjikEB0AwnKGmhbeaM75Cuo"
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/seeker/update/`, {
@@ -457,11 +469,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/verify-current/`, {
                 method: "POST",
-                headers: { 
+                headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify({current_password:password})
+                body: JSON.stringify({ current_password: password })
             });
             const responseBody = await res.json();
             if (!res.ok) {
@@ -479,11 +491,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/verify-otp/`, {
                 method: "POST",
-                headers: { 
+                headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`
                 },
-                body: JSON.stringify({otp:otp})
+                body: JSON.stringify({ otp: otp })
             });
             const responseBody = await res.json();
             if (!res.ok) {
@@ -502,9 +514,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/profile/resend-otp/`, {
                 method: "POST",
-                headers: { 
+                headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}` 
+                    Authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({})
             });

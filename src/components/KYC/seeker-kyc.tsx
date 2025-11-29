@@ -291,7 +291,7 @@ export function SeekerKYC() {
   const renderEntry = () => {
     let title = "";
     let description = "";
-    let inputs: JSX.Element[] = []
+    let inputs: React.ReactNode[] = [];
 
     if (selectedDoc === "nin") {
       title = "Enter your NIN"

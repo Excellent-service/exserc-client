@@ -7,15 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { usePathname, useRouter } from "next/navigation";
-import { Alert } from "@/components/ui/alert";
 
 interface fetchParams {
   role?: "seeker" | "provider";
-  schema?: z.ZodSchema;
-  action: (formData: FormData, context: any) => Promise<any>;
+  schema: z.ZodObject<any>; // <-- required and must be a ZodObject
+  action: (formData: FormData, context: unknown) => Promise<any>;
   checked?: boolean;
   path?: string;
-  contextAction?: any
+  contextAction?: unknown;
 }
 
 export const useAuth = ({
@@ -33,7 +32,7 @@ export const useAuth = ({
   const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof schema | any>>({
-    resolver: zodResolver(schema!),
+    resolver: zodResolver(schema),
     defaultValues: {
       role: role,
     },

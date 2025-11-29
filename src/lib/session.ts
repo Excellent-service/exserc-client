@@ -48,7 +48,7 @@
 type Type = "USER" | "VERIFICATION";
 
 export type SessionPayload = {
-  [key: string]: any;
+  [key: string]: unknown;
 };
 
 function getExpiry(type: Type) {
