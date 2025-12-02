@@ -423,9 +423,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
             setAuthStep("1");
             await localStorage.setItem("authStep", "1");
-            console.log(JSON.stringify(responseBody?.data));
-            Toast.success(JSON.stringify(responseBody?.data));
-            // Toast.success("Success");
+            // console.log(JSON.stringify(responseBody?.data));
+            // Toast.success(JSON.stringify(responseBody?.data));
+            Toast.success("Success");
             window.location.href = `/signup/create-profile?role=${tempUser.role}`;
         } catch (error: unknown) {
             if (error instanceof Error) {

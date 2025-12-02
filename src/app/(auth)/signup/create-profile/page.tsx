@@ -30,9 +30,9 @@ const CreateProfile_ = () => {
 function CreateProfile() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ProtectedRoute>
+      {/* <ProtectedRoute> */}
         <CreateProfile_ />
-      </ProtectedRoute>
+      {/* </ProtectedRoute> */}
     </Suspense>
   );
 }

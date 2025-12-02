@@ -199,7 +199,7 @@ const CreateSeekerProfile_ = () => {
 
               <div className="flex flex-col gap-y-5 w-full sm:max-w-[482px]">
                 {/* Phone Number & D.O.B. */}
-                <div className='flex items-center justify-between gap-3'>
+                <div className='md:flex items-center justify-between gap-3'>
                   <FormField
                     control={form.control}
                     name="phone_number"

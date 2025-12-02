@@ -799,8 +799,8 @@ const CreateProviderProfile = () => {
               </div>
 
               {/* Phone & DOB */}
-              <div className="flex gap-3">
-                <div className='w-full'>
+              <div className="md:flex gap-3">
+                <div className='w-full mb-6 md:mb-0'>
                   <p className="font-normal text-xs text-primary-1 pb-2">
                     Phone number
                   </p>
