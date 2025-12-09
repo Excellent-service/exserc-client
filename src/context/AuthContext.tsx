@@ -311,6 +311,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
 
             Toast.success("Profile updated successfully");
+            window.location.href = "/user/home";
         } catch (error) {
             Toast.error("Failed to update profile: " + error);
         } finally {
@@ -358,6 +359,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }
 
             Toast.success("Profile updated successfully");
+            window.location.href = "/user/home";
         } catch (error) {
             Toast.error("Failed to update profile: " + error);
         } finally {
